@@ -1,0 +1,29 @@
+{
+  "apps": [
+    {
+      "name": "vue2",
+      "script": "prod.server.js",
+      "env": {
+        "COMMON_VARIABLE": "true",
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    },
+  ],
+  "deploy": {
+    "production": {
+      "user": "cyh_manager",
+      "host": ["47.93.30.123"],
+      "port": "39999",
+      "ref": "origin/master",
+      "repo": "https://github.com/chenyihao2621023/vue2-webapp.git",
+      "path": "/www/vue2/production",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "post-deploy": "cnpm install && npm run build && pm2 startOrRestart ecosystem.json --env production",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
